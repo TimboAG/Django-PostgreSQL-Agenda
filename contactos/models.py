@@ -9,7 +9,7 @@ class Ciudad(models.Model):
 
 
 class Persona(models.Model):
-    dni = models.PositiveSmallIntegerField(max_length=8, primary_key=True)
+    dni = models.CharField(max_length=8, primary_key=True)
     apellido = models.CharField(max_length=25)
     nombre = models.CharField(max_length=25)
     sexos = [
