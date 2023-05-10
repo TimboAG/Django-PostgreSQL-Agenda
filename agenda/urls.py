@@ -20,6 +20,7 @@ from contactos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.crear_persona),
     path('form/', views.formulario, name="formulario"),
     path('contactar/', views.contactar),
 ]

@@ -1,32 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario de contacto</title>
-</head>
-<body>
-    <form>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email </label>
-          <input type="email" class="form-control" id="email" aria-describedby="email">
-        </div>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre </label>
-            <input type="text" class="form-control" id="nombre" aria-describedby="nombre">
-          </div>
-          <div class="mb-3">
-            <label for="apellido" class="form-label">Apellido </label>
-            <input type="text" class="form-control" id="apellido" aria-describedby="apellido">
-          </div>
-          <div class="mb-3">
-            <label for="telefono" class="form-label">Telefono </label>
-            <input type="text" class="form-control" id="telefono" aria-describedby="telefono">
-          </div>
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-</body>
+  </head>
+  <body>
+    <form method="POST" action="/">
+      {% csrf_token %}
+      <label for="dni">DNI:</label>
+      <input type="text" id="dni" name="dni" required /><br />
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required /><br />
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido" required /><br />
+
+      <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+      <input
+        type="date"
+        id="fecha_nacimiento"
+        name="fecha_nacimiento"
+        required
+      /><br />
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" required /><br />
+
+      <label for="telefono">Telefono:</label>
+      <input type="text" id="telefono" name="telefono" required /><br />
+
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" name="sexo">
+        {% for key, value in persona.sexos %}
+        <option value="{{ key }}">{{ value }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="ciudad">Ciudad:</label>
+      <select id="ciudad" name="ciudad">
+        {% for ciudad in ciudades %} {% if forloop.first %}
+        <option value="{{ ciudad.codigo }}" selected>
+          {{ ciudad.nombre }}
+        </option>
+        {% else %}
+        <option value="{{ ciudad.codigo }}">{{ ciudad.nombre }}</option>
+        {% endif %} {% endfor %}
+      </select>
+
+      <input type="submit" value="Guardar" />
+    </form>
+  </body>
 </html>
